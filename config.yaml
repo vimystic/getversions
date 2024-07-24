@@ -1,0 +1,9 @@
+chains:
+  - repo: "noble-assets/noble"
+    path: "go.mod"
+    version: "latest"
+    search_text: "cosmos-sdk"
+  - repo: "noble-assets/noble"
+    path: "go.mod"
+    version: "v6.0.0-rc.0"
+    search_text: "cometbft"
