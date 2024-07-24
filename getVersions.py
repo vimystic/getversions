@@ -1,4 +1,4 @@
-# version 0.0.4
+# version 0.0.11
 
 import requests
 import yaml
@@ -9,6 +9,9 @@ import os
 
 logging.basicConfig(level=logging.INFO)
 
+VERSION = "0.0.11"
+logging.info(f"Running script version {VERSION}")
+
 # Read GitHub PAT from environment variable
 GITHUB_PAT = os.getenv('GITHUB_PAT')
 
@@ -16,6 +19,17 @@ if not GITHUB_PAT:
     raise Exception("GitHub PAT not found. Please set the GITHUB_PAT environment variable.")
 else:
     logging.info("GitHub PAT found and will be used for authentication.")
+
+COINGECKO_API_URL = "https://api.coingecko.com/api/v3"
+
+# Mapping of repo names to CoinGecko IDs
+COINGECKO_IDS = {
+    "cosmos/gaia": "cosmos",
+    "ovrclk/akash": "akash-network",
+    "noble-assets/noble": "noble",
+    "sei-protocol/sei-chain": "sei-network",
+    # Add more mappings as necessary
+}
 
 def read_config(file_path):
     with open(file_path, 'r') as file:
@@ -67,11 +81,32 @@ def search_in_content(content, search_texts):
         result[search_text] = match.group(1) if match else ""
     return result
 
+def get_market_cap(repo):
+    chain_name = COINGECKO_IDS.get(repo, None)
+    if not chain_name:
+        logging.error(f"No CoinGecko ID mapping found for repo: {repo}")
+        return "N/A"
+
+    logging.info(f"Fetching market cap for chain: {chain_name}")
+    url = f"{COINGECKO_API_URL}/coins/{chain_name}"
+    response = requests.get(url)
+
+    if response.status_code == 404:
+        logging.error(f"Chain {chain_name} not found on CoinGecko.")
+        return "N/A"
+    if response.status_code != 200:
+        logging.error(f"Error fetching market cap for {chain_name}: {response.json().get('message', 'Unknown error')}")
+        return "Error"
+
+    data = response.json()
+    market_cap = data.get('market_data', {}).get('market_cap', {}).get('usd', "N/A")
+    return market_cap
+
 def generate_markdown_table(chains):
-    headers = ["repo - release_version"] + chains[0]['search']
+    headers = ["repo - release_version", "market_cap"] + chains[0]['search']
     rows = []
 
-    for chain in chains:
+    for chain in chains:  # Process all chains
         repo = chain['repo']
         gomod_path = chain['gomod_path']
         release_version = chain['release_version']
@@ -88,7 +123,12 @@ def generate_markdown_table(chains):
         try:
             file_content = get_file_content(repo, gomod_path, release_version)
             search_results = search_in_content(file_content, search_texts)
-            row = [f"{repo} - {release_version}"] + [search_results.get(term, "") for term in search_texts]
+            market_cap = get_market_cap(repo)
+            if isinstance(market_cap, (int, float)):
+                market_cap_str = f"${market_cap:,.2f}"
+            else:
+                market_cap_str = market_cap
+            row = [f"{repo} - {release_version}", market_cap_str] + [search_results.get(term, "") for term in search_texts]
             rows.append(row)
         except Exception as e:
             logging.error(e)
