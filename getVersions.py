@@ -1,12 +1,21 @@
-# version 0.0.2
+# version 0.0.4
 
 import requests
 import yaml
 import base64
 import logging
 import re
+import os
 
 logging.basicConfig(level=logging.INFO)
+
+# Read GitHub PAT from environment variable
+GITHUB_PAT = os.getenv('GITHUB_PAT')
+
+if not GITHUB_PAT:
+    raise Exception("GitHub PAT not found. Please set the GITHUB_PAT environment variable.")
+else:
+    logging.info("GitHub PAT found and will be used for authentication.")
 
 def read_config(file_path):
     with open(file_path, 'r') as file:
@@ -15,10 +24,13 @@ def read_config(file_path):
 
 def get_latest_release(repo):
     url = f"https://api.github.com/repos/{repo}/releases"
-    response = requests.get(url)
+    headers = {'Authorization': f'token {GITHUB_PAT}'}
+    response = requests.get(url, headers=headers)
     
     if response.status_code == 404:
         raise Exception(f"Repository {repo} not found.")
+    if response.status_code == 401:
+        raise Exception(f"Unauthorized: Check your PAT and scopes.")
     if response.status_code != 200:
         raise Exception(f"Error fetching releases from {repo}: {response.json().get('message', 'Unknown error')}")
 
@@ -31,10 +43,13 @@ def get_latest_release(repo):
 
 def get_file_content(repo, path, ref):
     url = f"https://api.github.com/repos/{repo}/contents/{path}?ref={ref}"
-    response = requests.get(url)
+    headers = {'Authorization': f'token {GITHUB_PAT}'}
+    response = requests.get(url, headers=headers)
     
     if response.status_code == 404:
         raise Exception(f"File {path} not found in repository {repo} at ref {ref}.")
+    if response.status_code == 401:
+        raise Exception(f"Unauthorized: Check your PAT and scopes.")
     if response.status_code != 200:
         raise Exception(f"Error fetching file {path} from {repo} at ref {ref}: {response.json().get('message', 'Unknown error')}")
 
