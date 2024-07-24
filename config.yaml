@@ -11,3 +11,199 @@ chains:
     gomod_path: "go.mod"
     release_version: "latest"
     search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "sei-protocol/sei-chain"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "ovrclk/akash"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "andromedaprotocol/andromeda"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "archway-network/archway"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "aura-nw/aura"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "axelarnetwork/axelar-core"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "BitCannaGlobal/bcna"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "bitsongofficial/go-bitsong"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "bluzelle/bluzelle-chain"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "celestiaorg/celestia-core"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "cheqd/cheqd-node"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "ChihuahuaChain/chihuahua"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "comdex-official/comdex"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "CoreumFoundation/coreum"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "cosmos/gaia"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "desmos-labs/desmos"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "dydxprotocol/dydx-v3-core"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "tharsis/evmos"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "gitopia/gitopia"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "haqq-network/haqq"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "CosmosContracts/Juno"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "Team-Kujira/core"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "kyve-org/kyve"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "likecoin/likecoin-chain"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "lum-network/chain"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "White-Whale-Defi-Platform/migaloo-core"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "neutron-org/neutron"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "strangelove-ventures/noble"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "noislabs/noisd"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "Nolus-Protocol/nolus"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "onomyprotocol/onomy"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "osmosis-labs/osmosis"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "envadiv/passage3D"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "persistenceOne/persistenceCore"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "planq-network/planq"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "provenance-io/provenance"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "quasar-finance/quasar"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "ingenuity-build/quicksilver"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "realiotech/realio"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "regen-network/regen-ledger"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "sei-protocol/sei-chain"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "sge-network/sge"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "PeggyJV/sommelier"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "Source-Protocol/source"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "public-awesome/stargaze"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "Stride-Labs/stride"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "TERITORI/teritori-chain"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "terra-money/core"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "xpladev/xpla"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
