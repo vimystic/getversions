@@ -7,3 +7,7 @@ chains:
     gomod_path: "go.mod"
     release_version: "v6.0.0-rc.0"
     search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "cosmos/gaia"
+    gomod_path: "go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
