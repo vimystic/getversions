@@ -1,4 +1,4 @@
-# version 0.0.1
+# version 0.0.2
 
 import requests
 import yaml
@@ -45,43 +45,53 @@ def get_file_content(repo, path, ref):
         raise Exception(f"File {path} in {repo} at ref {ref} is empty or cannot be read.")
 
 def search_in_content(content, search_texts):
-    lines = content.split('\n')
-    matching_lines = [line for line in lines if any(re.search(search_text, line) for search_text in search_texts) and not line.strip().startswith('//')]
-    return matching_lines
+    result = {}
+    for search_text in search_texts:
+        pattern = rf"{re.escape(search_text)}\s+([^\s]+)"
+        match = re.search(pattern, content)
+        result[search_text] = match.group(1) if match else ""
+    return result
 
-def process_chain(chain):
-    repo = chain['repo']
-    gomod_path = chain['gomod_path']
-    release_version = chain['release_version']
-    search_texts = chain.get('search', [])
+def generate_markdown_table(chains):
+    headers = ["repo - release_version"] + chains[0]['search']
+    rows = []
 
-    if release_version == "latest":
+    for chain in chains:
+        repo = chain['repo']
+        gomod_path = chain['gomod_path']
+        release_version = chain['release_version']
+        search_texts = chain.get('search', [])
+
+        if release_version == "latest":
+            try:
+                release_version = get_latest_release(repo)
+                logging.info(f"Repo: {repo}, Path: {gomod_path}, Latest Release Version: {release_version}")
+            except Exception as e:
+                logging.error(e)
+                continue
+
         try:
-            release_version = get_latest_release(repo)
-            logging.info(f"Repo: {repo}, Path: {gomod_path}, Latest Release Version: {release_version}")
+            file_content = get_file_content(repo, gomod_path, release_version)
+            search_results = search_in_content(file_content, search_texts)
+            row = [f"{repo} - {release_version}"] + [search_results.get(term, "") for term in search_texts]
+            rows.append(row)
         except Exception as e:
             logging.error(e)
-            return
-    
-    try:
-        file_content = get_file_content(repo, gomod_path, release_version)
-        if search_texts:
-            matching_lines = search_in_content(file_content, search_texts)
-            if matching_lines:
-                print(f"Contents of {gomod_path} in {repo} at version {release_version} containing any of {search_texts}:")
-                for line in matching_lines:
-                    print(f"    {line}")
-        else:
-            print(f"Contents of {gomod_path} in {repo} at version {release_version}:\n{file_content}")
-    except Exception as e:
-        logging.error(e)
+
+    # Generate markdown table
+    markdown_table = f"| {' | '.join(headers)} |\n"
+    markdown_table += f"|{'|'.join(['-' * len(header) for header in headers])}|\n"
+    for row in rows:
+        markdown_table += f"| {' | '.join(row)} |\n"
+
+    return markdown_table
 
 def main():
     config_file = 'config.yaml'
     config = read_config(config_file)
     
-    for chain in config['chains']:
-        process_chain(chain)
+    markdown_table = generate_markdown_table(config['chains'])
+    print(markdown_table)
 
 if __name__ == "__main__":
     main()
