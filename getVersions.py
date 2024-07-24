@@ -42,30 +42,30 @@ def get_file_content(repo, path, ref):
     else:
         raise Exception(f"File {path} in {repo} at ref {ref} is empty or cannot be read.")
 
-def search_in_content(content, search_text):
+def search_in_content(content, search_texts):
     lines = content.split('\n')
-    matching_lines = [line for line in lines if re.search(search_text, line)]
+    matching_lines = [line for line in lines if any(re.search(text, line) for text in search_texts)]
     return matching_lines
 
 def process_chain(chain):
     repo = chain['repo']
-    path = chain['path']
-    version = chain['version']
-    search_text = chain.get('search_text', '')
+    path = chain['gomod_path']
+    version = chain['release_version']
+    search_texts = chain.get('search', [])
 
     if version == "latest":
         try:
             version = get_latest_release(repo)
-            logging.info(f"Repo: {repo}, Path: {path}, Latest Release Version: {version}")
+            #logging.info(f"Repo: {repo}, Path: {path}, Latest Release Version: {version}")
         except Exception as e:
             logging.error(e)
             return
     
     try:
         file_content = get_file_content(repo, path, version)
-        if search_text:
-            matching_lines = search_in_content(file_content, search_text)
-            print(f"Contents of {path} in {repo} at version {version} containing '{search_text}':")
+        if search_texts:
+            matching_lines = search_in_content(file_content, search_texts)
+            print(f"Contents of {path} in {repo} at version {version} containing any of {search_texts}:")
             for line in matching_lines:
                 print(line)
         else:
