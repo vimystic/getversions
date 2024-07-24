@@ -44,32 +44,33 @@ def get_file_content(repo, path, ref):
 
 def search_in_content(content, search_texts):
     lines = content.split('\n')
-    matching_lines = [line for line in lines if any(re.search(text, line) for text in search_texts)]
+    matching_lines = [line for line in lines if any(re.search(search_text, line) for search_text in search_texts) and not line.strip().startswith('//')]
     return matching_lines
 
 def process_chain(chain):
     repo = chain['repo']
-    path = chain['gomod_path']
-    version = chain['release_version']
+    gomod_path = chain['gomod_path']
+    release_version = chain['release_version']
     search_texts = chain.get('search', [])
 
-    if version == "latest":
+    if release_version == "latest":
         try:
-            version = get_latest_release(repo)
-            #logging.info(f"Repo: {repo}, Path: {path}, Latest Release Version: {version}")
+            release_version = get_latest_release(repo)
+            logging.info(f"Repo: {repo}, Path: {gomod_path}, Latest Release Version: {release_version}")
         except Exception as e:
             logging.error(e)
             return
     
     try:
-        file_content = get_file_content(repo, path, version)
+        file_content = get_file_content(repo, gomod_path, release_version)
         if search_texts:
             matching_lines = search_in_content(file_content, search_texts)
-            print(f"Contents of {path} in {repo} at version {version} containing any of {search_texts}:")
-            for line in matching_lines:
-                print(line)
+            if matching_lines:
+                print(f"Contents of {gomod_path} in {repo} at version {release_version} containing any of {search_texts}:")
+                for line in matching_lines:
+                    print(f"    {line}")
         else:
-            print(f"Contents of {path} in {repo} at version {version}:\n{file_content}")
+            print(f"Contents of {gomod_path} in {repo} at version {release_version}:\n{file_content}")
     except Exception as e:
         logging.error(e)
 
