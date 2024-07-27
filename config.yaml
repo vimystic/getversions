@@ -207,3 +207,8 @@ chains:
     gomod_path: "go.mod"
     release_version: "latest"
     search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+  - repo: "dydxprotocol/v4-chain"
+    gomod_path: "protocol/go.mod"
+    release_version: "latest"
+    search: ["github.com/cosmos/cosmos-sdk", "github.com/cometbft/cometbft"]
+    
